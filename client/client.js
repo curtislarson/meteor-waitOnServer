@@ -4,8 +4,6 @@ Router.route("/test", {
     console.log("The data is ", Util.getResponse("testWaitOn"));
   },
   waitOn: function() {
-    if (!Util.isReady("testWaitOn")) {
-      return Util.waitOnServer("testWaitOn");
-    }
+    return Util.waitOnServer("testWaitOn");
   }
 })
