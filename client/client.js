@@ -5,6 +5,6 @@ Router.route("/test", {
   },
   waitOn: function() {
     // Call the async function, with an optional data argument
-    return Util.waitOnServer("testWaitOn", {foo: "bar"});
+    return Util.waitOnServer("testWaitOn", {foo: "bar"}, {bar: "foo"});
   }
 })
