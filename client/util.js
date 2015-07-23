@@ -6,7 +6,7 @@ Util.d_waitOns = {};
 // This function returns a handle with a reactive ready function, which
 // is what waitOn expects. waitOn will complete when the reactive function
 // returns true.
-Util.waitOnServer = function(name) {
+Util.waitOnServer = function(name, data) {
   // This prevents the waitOnServer call from being called multiple times
   // and the resulting infinite loop.
   if (this.d_waitOns[name] !== undefined &&
@@ -21,8 +21,8 @@ Util.waitOnServer = function(name) {
   this.d_waitOns[name].dep = new Deps.Dependency();
   this.d_waitOns[name].ready = false;
 
-  // Perform the actual async call.
-  Meteor.call(name, function(err, or) {
+  // Perform the actual async call. Pass the provided data to Meteor.call
+  Meteor.call(name, data, function(err, or) {
     // The call has complete, so set the ready flag, notify the reactive
     // function that we are ready, and store the data.
     self.d_waitOns[name].ready = true;
