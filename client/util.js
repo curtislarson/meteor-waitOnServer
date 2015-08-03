@@ -46,5 +46,9 @@ Util.waitOnServer = function(name) {
 
 // Retrieve the data that we stored in the async callback.
 Util.getResponse = function(name) {
-  return this.d_waitOns[name].data;
+  var data = this.d_waitOns[name].data;
+  // Clear out the data so a second call with the same name wont return
+  // the same data.
+  this.d_waitOns[name] = {};
+  return data;
 }
